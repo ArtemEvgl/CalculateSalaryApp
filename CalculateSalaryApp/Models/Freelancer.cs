@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace CalculateSalaryApp.Model
 {
-    class Freelancer : Employee
+    public class Freelancer : Employee
     {
 
         private int salaryForHour;
-        public Freelancer(string name, List<TaskWork> tasks, int salaryForHour, string position) : base(name, tasks, position)
+        public Freelancer(string name, List<TaskWork> tasks, int salaryForHour, string position) : base(name, position)
         {
             SalaryForHour = salaryForHour;
         }

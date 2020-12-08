@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace CalculateSalaryApp.Controllers
 {
+    //Todo: логику по максимуму перенести в директора, загрузку пользователей тож в директоре из конструктора контроллера, доделать менюшки.
     class DirectorController : BaseController
     {
         private Director director;
@@ -72,11 +73,57 @@ namespace CalculateSalaryApp.Controllers
         {
             switch (itemMenu)
             {
-                
+
+                case 1:
+                    ShowSelectEmployeeSubMenu();
+                    break;
+                case 2:
+                case 3:
+                case 4:
                 case 5:                    
                 default:
                     break;
             }
+        }
+
+        private void ShowSelectEmployeeSubMenu()
+        {
+            bool success;
+            int itemMenu;
+            do
+            {
+                View.SendMessage("Select and enter item of menu");
+                View.ShowSelectEmployeeSubMenu();
+                success = Int32.TryParse(Console.ReadLine(), out itemMenu);
+            } while (!success && itemMenu > 0 && itemMenu < 5);
+            StartSubMenuSelectEmployeeOper(itemMenu);
+
+        }
+
+        private void StartSubMenuSelectEmployeeOper(int itemMenu)
+        {
+            GetName();
+            GetWorkData();
+            switch(itemMenu)
+            {
+                case 1:                    
+                case 2:
+                case 3:
+                case 4:
+                default:
+                    ShowDirectorMenu();
+                    break;
+            }
+        }
+
+        private void GetWorkData()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void GetName()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -6,9 +6,17 @@ using System.Threading.Tasks;
 
 namespace CalculateSalaryApp.CMD
 {
-    public class View
+    public static class View
     {
        
+        public static void ShowSelectEmployeeSubMenu()
+        {
+            Console.WriteLine(new String('=', 20));
+            Console.WriteLine("1.Add director");
+            Console.WriteLine("2.Add staff employee");
+            Console.WriteLine("3.Add freelancer");
+            Console.WriteLine("4.Back");
+        }
         public static void ShowMenuDirector(string name)
         {
             Console.WriteLine(new String('=', 20));

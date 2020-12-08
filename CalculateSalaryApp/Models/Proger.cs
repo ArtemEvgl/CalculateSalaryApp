@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CalculateSalaryApp.Model
 {
-    class Proger : Employee
+    public class Proger : Employee
     {
         private int monthSalary;
         private int bonus;
-        public Proger(string name, List<TaskWork> tasks, int monthSalary, int bonus, string position) : base(name, tasks, position)
+        public Proger(string name, List<TaskWork> tasks, int monthSalary, int bonus, string position) : base(name, position)
         {
             MonthSalary = monthSalary;
             Bonus = bonus;
