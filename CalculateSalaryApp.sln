@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29827.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculateSalaryApp.BL", "CalculateSalaryApp\CalculateSalaryApp.BL.csproj", "{A89FCB11-3016-45E2-96C8-C0885ACD15C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculateSalaryApp.CMD", "CalculateSalaryApp.CMD\CalculateSalaryApp.CMD.csproj", "{30A0BF17-FB0C-46BB-9A29-927B1008E067}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A89FCB11-3016-45E2-96C8-C0885ACD15C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A89FCB11-3016-45E2-96C8-C0885ACD15C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A89FCB11-3016-45E2-96C8-C0885ACD15C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A89FCB11-3016-45E2-96C8-C0885ACD15C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30A0BF17-FB0C-46BB-9A29-927B1008E067}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30A0BF17-FB0C-46BB-9A29-927B1008E067}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30A0BF17-FB0C-46BB-9A29-927B1008E067}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30A0BF17-FB0C-46BB-9A29-927B1008E067}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5B537BC4-C509-4677-AA83-7DFDDFF1613B}
+	EndGlobalSection
+EndGlobal
