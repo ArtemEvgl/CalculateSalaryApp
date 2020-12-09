@@ -12,7 +12,7 @@ namespace CalculateSalaryApp.Model
     {
 
         private int salaryForHour;
-        public Freelancer(string name, List<TaskWork> tasks, int salaryForHour, string position) : base(name, position)
+        public Freelancer(string name, int salaryForHour, string position) : base(name, position)
         {
             SalaryForHour = salaryForHour;
         }

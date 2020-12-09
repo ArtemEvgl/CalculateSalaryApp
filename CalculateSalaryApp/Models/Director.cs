@@ -10,27 +10,16 @@ namespace CalculateSalaryApp.Model
     {
         private int monthSalary;
         private int bonus;
-        private List<Proger> progers;
-        private List<Freelancer> freelancers;
+       
 
 
-        public Director(string name, List<TaskWork> tasks, int monthSalary, int bonus, string position) : base(name, position)
+        public Director(string name, int monthSalary, int bonus, string position) : base(name, position)
         {
             MonthSalary = monthSalary;
             Bonus = bonus;
         }
 
-        public List<Freelancer> Freelancers
-        {
-            get { return freelancers; }
-            set { freelancers = value; }
-        }
-
-        public List<Proger> Progers
-        {
-            get { return progers; }
-            set { progers = value; }
-        }
+        
 
         public int MonthSalary
         {

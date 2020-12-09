@@ -1,4 +1,5 @@
 ﻿using CalculateSalaryApp.CMD;
+using CalculateSalaryApp.DataWorker;
 using CalculateSalaryApp.Model;
 using System;
 using System.Collections.Generic;
@@ -9,51 +10,19 @@ using System.Threading.Tasks;
 namespace CalculateSalaryApp.Controllers
 {
     //Todo: логику по максимуму перенести в директора, загрузку пользователей тож в директоре из конструктора контроллера, доделать менюшки.
-    class DirectorController : BaseController
+    class DirectorController
     {
         private Director director;
-        private List<Director> directors = new List<Director>();
-        private List<Proger> progers = new List<Proger>();
-        private List<Freelancer> freelancers = new List<Freelancer>();
-        public DirectorController(Director director)
+        private DirectoRepository directorRepository;
+
+
+        public DirectorController(Director director, DirectoRepository directorRepository)
         {
             this.director = director;
-            LoadAllEmployess();
+            this.directorRepository = directorRepository;
             ShowDirectorMenu();
         }
 
-        
-        public bool AddEmployee(Employee employee)
-        {
-            bool result = true;
-            if (employee is Director director)
-            {
-                directors.Add(director);
-                Save<Director>(directors,Settings.directorsFile);
-            }
-            else if (employee is Proger proger)
-            {
-                progers.Add(proger);
-                Save<Proger>(progers, Settings.progersFile);
-            }
-            else if (employee is Freelancer freelancer)
-            {
-                freelancers.Add(freelancer);
-                Save<Freelancer>(freelancers, Settings.freelancerFile);
-            } else
-            {
-                result = false;
-            }
-            return result;
-            
-        }
-
-        private void LoadAllEmployess()
-        {
-            directors = Load<Director>(Settings.directorsFile);
-            progers = Load<Proger>(Settings.progersFile);
-            freelancers = Load<Freelancer>(Settings.freelancerFile);
-        }
 
         
         private void ShowDirectorMenu()
@@ -66,21 +35,22 @@ namespace CalculateSalaryApp.Controllers
                 View.ShowMenuDirector(director.Name);
                 success = Int32.TryParse(Console.ReadLine(), out itemMenu);
             } while (!success && itemMenu > 0 && itemMenu < 6);
-            StartMenuOperation(itemMenu);
+            StartMenuOperation((DirectorMenuOperation)itemMenu);
         }
 
-        private void StartMenuOperation(int itemMenu)
+        private void StartMenuOperation(DirectorMenuOperation directorMenuOperation)
         {
-            switch (itemMenu)
+            switch (directorMenuOperation)
             {
 
-                case 1:
+                case DirectorMenuOperation.AddUser:
                     ShowSelectEmployeeSubMenu();
                     break;
-                case 2:
-                case 3:
-                case 4:
-                case 5:                    
+                case DirectorMenuOperation.ShowReportForAll:
+                case DirectorMenuOperation.ShowReportForSpecific:
+                case DirectorMenuOperation.AddHours:
+                case DirectorMenuOperation.Exit:
+                    return;
                 default:
                     break;
             }
@@ -96,34 +66,77 @@ namespace CalculateSalaryApp.Controllers
                 View.ShowSelectEmployeeSubMenu();
                 success = Int32.TryParse(Console.ReadLine(), out itemMenu);
             } while (!success && itemMenu > 0 && itemMenu < 5);
-            StartSubMenuSelectEmployeeOper(itemMenu);
+            if (itemMenu == 4)
+            {
+                ShowDirectorMenu();
+            }
+            else
+            {
+                StartSubMenuSelectEmployeeOper((AddOperation)itemMenu);
+            }
 
         }
-
-        private void StartSubMenuSelectEmployeeOper(int itemMenu)
+        //todo: убрать магические числа
+        private void StartSubMenuSelectEmployeeOper(AddOperation addOperation)
         {
-            GetName();
-            GetWorkData();
-            switch(itemMenu)
+            
+            
+            var workData = GetWorkData(addOperation);
+            switch(addOperation)
             {
-                case 1:                    
-                case 2:
-                case 3:
-                case 4:
+                case AddOperation.AddDirector:
+                    Director addDirector = new Director(workData.name, workData.monthSalary, workData.bonus, workData.position);
+                    directorRepository.AddEmployee<Director>(addDirector, Settings.directorsFile);
+                    ShowDirectorMenu();
+                    break;
+                case AddOperation.AddProger:
+                    Proger addProger = new Proger(workData.name, workData.monthSalary, workData.bonus, workData.position);
+                    directorRepository.AddEmployee<Proger>(addProger, Settings.progersFile);
+                    ShowDirectorMenu();
+                    break;
+                case AddOperation.AddFreelancer:
+                    Freelancer addFreelancer = new Freelancer(workData.name, workData.monthSalary, workData.position);
+                    directorRepository.AddEmployee<Freelancer>(addFreelancer, Settings.freelancerFile);
+                    ShowDirectorMenu();
+                    break;
                 default:
                     ShowDirectorMenu();
                     break;
             }
         }
 
-        private void GetWorkData()
+        //Todo: доделать проверку
+        private (string name, string position, int monthSalary, int bonus) GetWorkData(AddOperation addOperation)
         {
-            throw new NotImplementedException();
+            View.SendMessage("Name: ");
+            string name = Console.ReadLine();
+            View.SendMessage("position: ");
+            string position = Console.ReadLine();
+            int salary;
+            int bonus = 0;
+            if (addOperation != AddOperation.AddFreelancer)
+            {
+                View.SendMessage("Month Salary: ");
+                Int32.TryParse(Console.ReadLine(), out salary);
+                bonus = GetBonus();
+            } else
+            {
+                View.SendMessage("Salary for hour: ");
+                Int32.TryParse(Console.ReadLine(), out salary);
+            }
+            return (name: name, position : position, monthSalary : salary, bonus : bonus);
         }
 
-        private void GetName()
+        private int GetBonus()
         {
-            throw new NotImplementedException();
+            bool result = false;
+            int bonus = 0;
+            do
+            {
+                View.SendMessage("bonus: ");
+                result = Int32.TryParse(Console.ReadLine(), out bonus);
+            } while (!result);
+            return bonus;
         }
     }
 }

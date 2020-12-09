@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CalculateSalaryApp.Controllers
+namespace CalculateSalaryApp.DataWorker
 {
-    interface IDataWorker
+    public interface IRepository
     {
         List<T> Load<T>(string fileName) where T : class;
         void Save<T>(List<T> employees, string fileName) where T : class;

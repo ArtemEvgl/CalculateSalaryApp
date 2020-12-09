@@ -10,7 +10,7 @@ namespace CalculateSalaryApp.Model
     {
         private int monthSalary;
         private int bonus;
-        public Proger(string name, List<TaskWork> tasks, int monthSalary, int bonus, string position) : base(name, position)
+        public Proger(string name, int monthSalary, int bonus, string position) : base(name, position)
         {
             MonthSalary = monthSalary;
             Bonus = bonus;

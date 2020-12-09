@@ -78,13 +78,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AuthorizationController.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DirectorController.cs" />
     <Compile Include="Controllers\FreelancerController.cs" />
-    <Compile Include="Controllers\IDataWorker.cs" />
-    <Compile Include="Controllers\JsonDataWorker.cs" />
     <Compile Include="Controllers\ProgerController.cs" />
-    <Compile Include="Controllers\TestDataWorker.cs" />
+    <Compile Include="DataWorker\AuthorizationRepository.cs" />
+    <Compile Include="DataWorker\DirectoRepository.cs" />
+    <Compile Include="DataWorker\IRepository.cs" />
+    <Compile Include="DataWorker\JsonRepository.cs" />
+    <Compile Include="DataWorker\ManagerRepository.cs" />
+    <Compile Include="DataWorker\TestRepository.cs" />
     <Compile Include="Models\Director.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Freelancer.cs" />

@@ -1,4 +1,5 @@
-﻿using CalculateSalaryApp.Model;
+﻿using CalculateSalaryApp.DataWorker;
+using CalculateSalaryApp.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -9,23 +10,22 @@ using System.Threading.Tasks;
 
 namespace CalculateSalaryApp.Controllers
 {
-    public class AuthorizationController : BaseController
+    public class AuthorizationController
     {
 
-        
-        private List<Employee> allEmployees = new List<Employee>();
 
-        public AuthorizationController(string name)
+        
+
+        public AuthorizationController(string name, AuthorizationRepository authorizationRepository)
         {
-            allEmployees.AddRange(Load<Director>(Settings.directorsFile));
-            allEmployees.AddRange(Load<Proger>(Settings.progersFile));
-            allEmployees.AddRange(Load<Freelancer>(Settings.freelancerFile));
-            Authorization(name);
+
+            Authorization(name, authorizationRepository);
         }
 
-        private void Authorization(string name)
+        //Todo: обеспечить безотказность
+        private void Authorization(string name, AuthorizationRepository authorizationRepository)
         {
-            Employee searchResult = allEmployees.SingleOrDefault(u => u.Name == name);            
+            Employee searchResult = authorizationRepository.Authorization(name);         
             if(searchResult != null)
             {
                 StartUserController(searchResult);
@@ -37,9 +37,12 @@ namespace CalculateSalaryApp.Controllers
 
         private void StartUserController(Employee searchResult)
         {
-            if(searchResult is Director director)
+            ManagerRepository managerRepository = new ManagerRepository(new JsonRepository());
+            if (searchResult is Director director)
             {
-                new DirectorController(director);
+
+                DirectoRepository directorRepository = new DirectoRepository(managerRepository);
+                new DirectorController(director, directorRepository);
             } else if(searchResult is Proger proger)
             {
                 new ProgerController(proger);

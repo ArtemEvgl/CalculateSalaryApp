@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CalculateSalaryApp.Controllers
 {
-    class FreelancerController : BaseController
+    class FreelancerController
     {
         public FreelancerController(Freelancer freelancer)
         {

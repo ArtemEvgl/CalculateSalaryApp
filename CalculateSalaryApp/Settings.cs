@@ -11,5 +11,22 @@ namespace CalculateSalaryApp
         public const string directorsFile = "directors.json";
         public const string progersFile = "progers.json";
         public const string freelancerFile = "freelancers.json";
+        
+    }
+    enum AddOperation
+    {
+        AddDirector,
+        AddProger,
+        AddFreelancer
+    }
+
+    enum DirectorMenuOperation
+    {
+        AddUser,
+        ShowReportForAll,
+        ShowReportForSpecific,
+        AddHours,
+        Exit
+
     }
 }

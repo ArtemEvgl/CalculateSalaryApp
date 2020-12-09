@@ -1,6 +1,7 @@
 ﻿
 using CalculateSalaryApp.CMD;
 using CalculateSalaryApp.Controllers;
+using CalculateSalaryApp.DataWorker;
 using CalculateSalaryApp.Model;
 using Newtonsoft.Json;
 using System;
@@ -19,7 +20,9 @@ namespace CalculateSalaryApp
 
             View.SendMessage("Hello, please enter your name: ");
             string name = Console.ReadLine();
-            AuthorizationController authorizationController = new AuthorizationController(name);
+            ManagerRepository managerRepository = new ManagerRepository(new JsonRepository());
+            AuthorizationRepository authorizationRepository = new AuthorizationRepository(managerRepository);
+            AuthorizationController authorizationController = new AuthorizationController(name, authorizationRepository);
         }
     }
 }

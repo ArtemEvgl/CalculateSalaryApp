@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CalculateSalaryApp.Controllers
+namespace CalculateSalaryApp.DataWorker
 {
-    class TestDataWorker : IDataWorker
+    /// <summary>
+    /// Репозиторий для тестов, можно создать коллекция побыстрому
+    /// </summary>
+    public class TestRepository : IRepository
     {
         public List<T> Load<T>(string fileName) where T : class
         {
