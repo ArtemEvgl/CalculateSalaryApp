@@ -26,7 +26,8 @@ namespace CalculateSalaryApp.CMD
             Console.WriteLine("2.Show report for all user");
             Console.WriteLine("3.Show report for specific user");
             Console.WriteLine("4.Add work's hours");
-            Console.WriteLine("5.Exit");
+            Console.WriteLine("5.Delete employee");
+            Console.WriteLine("6.Exit");
         }
         
         public static void SendMessage(string msg)

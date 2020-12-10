@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CalculateSalaryApp.Model
 {
-    public class Employee
+    abstract public class Employee
     {
         public Employee(string name, string position)
         {
@@ -26,7 +26,7 @@ namespace CalculateSalaryApp.Model
 
         public string Position { get; }
 
-
+        public abstract string GetTotalReport(DateTime startDate, DateTime finishDate);
 
 
     }

@@ -18,5 +18,10 @@ namespace CalculateSalaryApp.DataWorker
         {
             managerRepository.AddEmployee<T>(employee, fileName);
         }
+
+        public bool DeleteEmployee(string fileName)
+        {
+            return managerRepository.DeleteEmployee(fileName);
+        }
     }
 }

@@ -10,10 +10,10 @@ namespace CalculateSalaryApp.Model
     {
         private int monthSalary;
         private int bonus;
-        public Proger(string name, int monthSalary, int bonus, string position) : base(name, position)
+        public Proger(string name, int monthSalary, string position) : base(name, position)
         {
             MonthSalary = monthSalary;
-            Bonus = bonus;
+            Bonus = MonthSalary / Settings.WorkHoursInMonth * 2;
         }
 
         public int MonthSalary
@@ -61,9 +61,46 @@ namespace CalculateSalaryApp.Model
 
         }
 
-        public string GetReport(WorkPeriod workPeriod)
+        public override bool Equals(object obj)
         {
-            return "";
+            return obj is Proger proger &&
+                   monthSalary == proger.monthSalary &&
+                   bonus == proger.bonus &&
+                   MonthSalary == proger.MonthSalary &&
+                   Bonus == proger.Bonus;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -374643154;
+            hashCode = hashCode * -1521134295 + monthSalary.GetHashCode();
+            hashCode = hashCode * -1521134295 + bonus.GetHashCode();
+            hashCode = hashCode * -1521134295 + MonthSalary.GetHashCode();
+            hashCode = hashCode * -1521134295 + Bonus.GetHashCode();
+            return hashCode;
+        }
+
+        public override string GetTotalReport(DateTime startDate, DateTime finishDate)
+        {
+            int payPerHour = MonthSalary / Settings.WorkDaysInMonth / Settings.WorkHoursInDay;            
+            int payReport = 0;
+            var reportTasks = Tasks.Where(task => task.DateTime >= startDate && task.DateTime <= finishDate);
+            foreach (var task in reportTasks)
+            {
+                if (task.Hour <= Settings.WorkHoursInDay)
+                {
+                    payReport += payPerHour * task.Hour;
+                } 
+                else
+                {
+                    payReport += payPerHour * Settings.WorkHoursInDay;
+                    payReport += Bonus * (task.Hour - 8);
+                }
+            }
+            int hours = reportTasks.Sum(task => task.Hour);
+            string report = String.Format("{0} worked {1} hours and earned {2}", Name, hours, payReport);
+            return report;
+
         }
     }
 }

@@ -20,44 +20,47 @@ namespace CalculateSalaryApp.DataWorker
         {
             List<Employee> allEmployees = new List<Employee>();
             allEmployees.AddRange(repository.Load<Director>(Settings.directorsFile));
-            allEmployees.AddRange(repository.Load<Proger>(Settings.progersFile));
-            allEmployees.AddRange(repository.Load<Freelancer>(Settings.freelancerFile));
+            allEmployees.AddRange(repository.Load<Proger>(Settings.progersFile) ?? new List<Proger>());
+            allEmployees.AddRange(repository.Load<Freelancer>(Settings.freelancerFile) ?? new List<Freelancer>());
             return allEmployees.SingleOrDefault(u => u.Name == name);
 
         }
+        
+        public bool DeleteEmployee(string fileName)
+        {
+            Employee employee = SearchEmployee(fileName);
+            bool result = false;
+            if(employee is Director director)
+            {
+                Delete<Director>(director, Settings.directorsFile, ref result);
+            } else if(employee is Proger proger)
+            {
+                Delete<Proger>(proger, Settings.progersFile, ref result);
+            } else if(employee is Freelancer freelancer)
+            {
+                Delete<Freelancer>(freelancer, Settings.freelancerFile, ref result);
+            }
+            return result;
+        }
 
-        //public bool AddEmployee(Employee employee)
-        //{
-        //    bool result = true;
-        //    if (employee is Director director)
-        //    {
-        //        directors.Add(director);
-        //        Save<Director>(directors, Settings.directorsFile);
-        //    }
-        //    else if (employee is Proger proger)
-        //    {
-        //        progers.Add(proger);
-        //        Save<Proger>(progers, Settings.progersFile);
-        //    }
-        //    else if (employee is Freelancer freelancer)
-        //    {
-        //        freelancers.Add(freelancer);
-        //        Save<Freelancer>(freelancers, Settings.freelancerFile);
-        //    }
-        //    else
-        //    {
-        //        result = false;
-        //    }
-        //    return result;
+        private void Delete<T> (T employee, string fileName, ref bool result) where T : class
+        {
+            List<T> employees = repository.Load<T>(fileName);
+            var delItems = employees.Where(emp => emp.Equals(employee));
+            int a = employees.RemoveAll(e => e.Equals(employee));
+            repository.Save<T>(employees, fileName);
+            result = true;
 
-        //}
+        }
 
         public void AddEmployee<T> (T employee, string fileName) where T : class
         {
-            List<T> employees = repository.Load<T>(fileName);
+            List<T> employees = repository.Load<T>(fileName) ?? new List<T>();
             employees.Add(employee);
             repository.Save<T>(employees, fileName);
         }
+
+
 
     }
 }

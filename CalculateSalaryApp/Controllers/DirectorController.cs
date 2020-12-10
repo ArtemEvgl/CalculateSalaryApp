@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CalculateSalaryApp.Controllers
 {
-    //Todo: логику по максимуму перенести в директора, загрузку пользователей тож в директоре из конструктора контроллера, доделать менюшки.
+    
     class DirectorController
     {
         private Director director;
@@ -34,10 +34,11 @@ namespace CalculateSalaryApp.Controllers
                 View.SendMessage("Select and enter item of menu");
                 View.ShowMenuDirector(director.Name);
                 success = Int32.TryParse(Console.ReadLine(), out itemMenu);
-            } while (!success && itemMenu > 0 && itemMenu < 6);
+            } while (!success && itemMenu > 0 && itemMenu < 7);
             StartMenuOperation((DirectorMenuOperation)itemMenu);
         }
 
+        //Todo: забрать из контроллера даты, подумать о том что надо возвращаьб в отчете не строчку а число и потом формировать уже отчет ибо даты известны а надо еще считать общую сумму
         private void StartMenuOperation(DirectorMenuOperation directorMenuOperation)
         {
             switch (directorMenuOperation)
@@ -49,10 +50,12 @@ namespace CalculateSalaryApp.Controllers
                 case DirectorMenuOperation.ShowReportForAll:
                 case DirectorMenuOperation.ShowReportForSpecific:
                 case DirectorMenuOperation.AddHours:
-                case DirectorMenuOperation.Exit:
-                    return;
-                default:
+                case DirectorMenuOperation.DeleteEmployee:
+                    DeleteEmployee();
                     break;
+                case DirectorMenuOperation.Exit:
+                default:
+                    return;
             }
         }
 
@@ -76,7 +79,7 @@ namespace CalculateSalaryApp.Controllers
             }
 
         }
-        //todo: убрать магические числа
+        
         private void StartSubMenuSelectEmployeeOper(AddOperation addOperation)
         {
             
@@ -90,7 +93,7 @@ namespace CalculateSalaryApp.Controllers
                     ShowDirectorMenu();
                     break;
                 case AddOperation.AddProger:
-                    Proger addProger = new Proger(workData.name, workData.monthSalary, workData.bonus, workData.position);
+                    Proger addProger = new Proger(workData.name, workData.monthSalary, workData.position);
                     directorRepository.AddEmployee<Proger>(addProger, Settings.progersFile);
                     ShowDirectorMenu();
                     break;
@@ -118,7 +121,7 @@ namespace CalculateSalaryApp.Controllers
             {
                 View.SendMessage("Month Salary: ");
                 Int32.TryParse(Console.ReadLine(), out salary);
-                bonus = GetBonus();
+                bonus = addOperation == AddOperation.AddDirector ? GetBonus() : 0;
             } else
             {
                 View.SendMessage("Salary for hour: ");
@@ -137,6 +140,20 @@ namespace CalculateSalaryApp.Controllers
                 result = Int32.TryParse(Console.ReadLine(), out bonus);
             } while (!result);
             return bonus;
+        }
+
+        private void DeleteEmployee()
+        {
+            View.SendMessage("Enter name: ");
+            string name = Console.ReadLine();
+            if (directorRepository.DeleteEmployee(name))
+            {
+                View.SendMessage("Employee deleted");
+            } else
+            {
+                View.SendMessage("Deleted is failed");
+            }
+            ShowDirectorMenu();
         }
     }
 }
