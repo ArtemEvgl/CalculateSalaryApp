@@ -38,7 +38,7 @@ namespace CalculateSalaryApp.Controllers
             StartMenuOperation((DirectorMenuOperation)itemMenu);
         }
 
-        //Todo: забрать из контроллера даты, подумать о том что надо возвращаьб в отчете не строчку а число и потом формировать уже отчет ибо даты известны а надо еще считать общую сумму
+        
         private void StartMenuOperation(DirectorMenuOperation directorMenuOperation)
         {
             switch (directorMenuOperation)
@@ -48,6 +48,9 @@ namespace CalculateSalaryApp.Controllers
                     ShowSelectEmployeeSubMenu();
                     break;
                 case DirectorMenuOperation.ShowReportForAll:
+                    var intervalData = GetDataInterval();
+                    ShowTotalReport(intervalData);
+                    break;
                 case DirectorMenuOperation.ShowReportForSpecific:
                 case DirectorMenuOperation.AddHours:
                 case DirectorMenuOperation.DeleteEmployee:
@@ -57,6 +60,21 @@ namespace CalculateSalaryApp.Controllers
                 default:
                     return;
             }
+        }
+
+        private (DateTime start, DateTime finish) GetDataInterval()
+        {
+            DateTime start, finish;
+            bool isParseDateStart, isParseDateFinish;
+            do
+            {
+                View.SendMessage("Enter start report date in format dd.mm.yy");
+                isParseDateStart = DateTime.TryParse(Console.ReadLine(), out start);
+                View.SendMessage("Enter finish report date in format dd.mm.yy");
+                isParseDateFinish = DateTime.TryParse(Console.ReadLine(), out finish);
+                if (!(isParseDateStart && isParseDateFinish)) View.SendMessage("Format data is failed, please try again");
+            } while (!(isParseDateStart && isParseDateFinish));
+            return (start: start, finish: finish);
         }
 
         private void ShowSelectEmployeeSubMenu()
@@ -153,6 +171,14 @@ namespace CalculateSalaryApp.Controllers
             {
                 View.SendMessage("Deleted is failed");
             }
+            ShowDirectorMenu();
+        }
+
+        private void ShowTotalReport((DateTime start, DateTime finish) intervalData)
+        {
+            View.SendMessage(directorRepository.GetTotalReport(intervalData.start, intervalData.finish));
+            View.SendMessage("\nPress any key to continue...");
+            Console.ReadKey();
             ShowDirectorMenu();
         }
     }

@@ -23,5 +23,10 @@ namespace CalculateSalaryApp.DataWorker
         {
             return managerRepository.DeleteEmployee(fileName);
         }
+
+        public string GetTotalReport(DateTime start, DateTime finish)
+        {
+            return managerRepository.GetTotalReport(start, finish);
+        }
     }
 }

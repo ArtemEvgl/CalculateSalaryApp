@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CalculateSalaryApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,7 @@ namespace CalculateSalaryApp.Model
 
         public string Position { get; }
 
-        public abstract string GetTotalReport(DateTime startDate, DateTime finishDate);
+        public abstract ReportData GetReport(DateTime startDate, DateTime finishDate);
 
 
     }

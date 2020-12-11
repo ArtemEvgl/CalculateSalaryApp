@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CalculateSalaryApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -79,27 +80,27 @@ namespace CalculateSalaryApp.Model
             return hashCode;
         }
 
-        public override string GetTotalReport(DateTime startDate, DateTime finishDate)
+        public override ReportData GetReport(DateTime startDate, DateTime finishDate)
         {
             int payPerHour = MonthSalary / Settings.WorkDaysInMonth / Settings.WorkHoursInDay;
             int payPerBonus = Bonus / Settings.WorkDaysInMonth;
-            int payReport = 0;
+            int salary = 0;
             var reportTasks = Tasks.Where(task => task.DateTime >= startDate && task.DateTime <= finishDate);
             foreach (var task in reportTasks)
             {
                 if (task.Hour <= Settings.WorkHoursInDay)
                 {
-                    payReport += task.Hour * payPerHour;
+                    salary += task.Hour * payPerHour;
                 }               
                 else
                 {
-                    payReport += task.Hour * Settings.WorkHoursInDay;
-                    payReport += payPerBonus;
+                    salary += task.Hour * Settings.WorkHoursInDay;
+                    salary += payPerBonus;
                 }
             }
             int hours = reportTasks.Sum(task => task.Hour);
-            string report = String.Format("{0} worked {1} hours and earned {2}", Name, hours, payReport);
-            return report;
+            //string report = String.Format("{0} worked {1} hours and earned {2}", Name, hours, salary);            
+            return new ReportData(hours, salary);
         }
     }
     

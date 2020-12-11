@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CalculateSalaryApp.Models;
+using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -53,13 +54,13 @@ namespace CalculateSalaryApp.Model
             return hashCode;
         }
 
-        public override string GetTotalReport(DateTime startDate, DateTime finishDate)
+        public override ReportData GetReport(DateTime startDate, DateTime finishDate)
         {
             var reportDays = Tasks.Where(task => task.DateTime <= finishDate && task.DateTime >= startDate);
             int hours = reportDays.Sum(task => task.Hour);
             int sum = hours * salaryForHour;
-            string report = String.Format("{0} worked {1} hours and earned {2}", Name, hours, sum);
-            return report;
+            //string report = String.Format("{0} worked {1} hours and earned {2}", Name, hours, sum);
+            return new ReportData(hours, sum);
         }
     }
 }

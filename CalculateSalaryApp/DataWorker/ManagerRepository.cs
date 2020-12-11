@@ -1,4 +1,5 @@
 ﻿using CalculateSalaryApp.Model;
+using CalculateSalaryApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,7 @@ namespace CalculateSalaryApp.DataWorker
 
         public Employee SearchEmployee(string name)
         {
-            List<Employee> allEmployees = new List<Employee>();
-            allEmployees.AddRange(repository.Load<Director>(Settings.directorsFile));
-            allEmployees.AddRange(repository.Load<Proger>(Settings.progersFile) ?? new List<Proger>());
-            allEmployees.AddRange(repository.Load<Freelancer>(Settings.freelancerFile) ?? new List<Freelancer>());
+            List<Employee> allEmployees = GetAllEmployee();
             return allEmployees.SingleOrDefault(u => u.Name == name);
 
         }
@@ -60,7 +58,30 @@ namespace CalculateSalaryApp.DataWorker
             repository.Save<T>(employees, fileName);
         }
 
+        public string GetTotalReport(DateTime start, DateTime finish)
+        {
+            StringBuilder report = new StringBuilder($"Report per interval from {start.ToString("d")} to {finish.ToString("d")}\n\n");
+            List<Employee> allEmployees = GetAllEmployee();
+            int totalPay = 0, totalHour = 0;
+            foreach (var emp in allEmployees)
+            {
+                ReportData reportData = emp.GetReport(start, finish);
+                report.Append($"{emp.Name} worked {reportData.Hour} hours and earned {reportData.Pay}\n");
+                totalPay += reportData.Pay;
+                totalHour += reportData.Hour;
+            }
+            report.Append($"\nTotal hours have worked - {totalHour} total pay - {totalPay}");
+            return report.ToString();
+        }
 
+        private List<Employee> GetAllEmployee()
+        {
+            List<Employee> allEmployees = new List<Employee>();
+            allEmployees.AddRange(repository.Load<Director>(Settings.directorsFile));
+            allEmployees.AddRange(repository.Load<Proger>(Settings.progersFile) ?? new List<Proger>());
+            allEmployees.AddRange(repository.Load<Freelancer>(Settings.freelancerFile) ?? new List<Freelancer>());
+            return allEmployees;
+        }
 
     }
 }

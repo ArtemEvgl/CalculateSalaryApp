@@ -87,6 +87,7 @@
     <Compile Include="DataWorker\JsonRepository.cs" />
     <Compile Include="DataWorker\ManagerRepository.cs" />
     <Compile Include="DataWorker\TestRepository.cs" />
+    <Compile Include="Models\ReportData.cs" />
     <Compile Include="Models\Director.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Freelancer.cs" />
