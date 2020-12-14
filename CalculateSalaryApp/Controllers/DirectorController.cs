@@ -48,10 +48,12 @@ namespace CalculateSalaryApp.Controllers
                     ShowSelectEmployeeSubMenu();
                     break;
                 case DirectorMenuOperation.ShowReportForAll:
-                    var intervalData = GetDataInterval();
-                    ShowTotalReport(intervalData);
+                    ShowTotalReport();
                     break;
                 case DirectorMenuOperation.ShowReportForSpecific:
+                    Employee emp = GetEmployee();
+                    ShowSpecificReport(emp);
+                    break;
                 case DirectorMenuOperation.AddHours:
                 case DirectorMenuOperation.DeleteEmployee:
                     DeleteEmployee();
@@ -60,6 +62,29 @@ namespace CalculateSalaryApp.Controllers
                 default:
                     return;
             }
+        }
+
+        private void ShowSpecificReport(Employee emp)
+        {
+            var intervalData = GetDataInterval();
+            View.SendMessage(directorRepository.GetSpicificReport(intervalData.start, intervalData.finish, emp));
+            View.SendMessage("\nPress any key to continue...");
+            Console.ReadKey();
+            ShowDirectorMenu();
+        }
+
+        private Employee GetEmployee()
+        {
+            string name = "";
+            Employee result;
+            do
+            {
+                if (!string.IsNullOrWhiteSpace(name)) Console.WriteLine("Name is not found, please try again"); 
+                View.SendMessage("Enter employee's name: ");
+                name = Console.ReadLine();
+                result = directorRepository.GetEmployee(name);
+            } while (name != null);
+            return result;
         }
 
         private (DateTime start, DateTime finish) GetDataInterval()
@@ -174,8 +199,9 @@ namespace CalculateSalaryApp.Controllers
             ShowDirectorMenu();
         }
 
-        private void ShowTotalReport((DateTime start, DateTime finish) intervalData)
+        private void ShowTotalReport()
         {
+            var intervalData = GetDataInterval();
             View.SendMessage(directorRepository.GetTotalReport(intervalData.start, intervalData.finish));
             View.SendMessage("\nPress any key to continue...");
             Console.ReadKey();

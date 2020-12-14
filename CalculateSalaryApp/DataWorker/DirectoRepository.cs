@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CalculateSalaryApp.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,16 @@ namespace CalculateSalaryApp.DataWorker
         public string GetTotalReport(DateTime start, DateTime finish)
         {
             return managerRepository.GetTotalReport(start, finish);
+        }
+
+        public Employee GetEmployee(string name)
+        {
+            return managerRepository.SearchEmployee(name);
+        }
+
+        public string GetSpicificReport(DateTime start, DateTime finish, Employee emp)
+        {
+            return managerRepository.GetSpecificReport(start, finish, emp);
         }
     }
 }

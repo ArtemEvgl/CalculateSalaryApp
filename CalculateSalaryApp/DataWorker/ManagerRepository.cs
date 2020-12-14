@@ -41,6 +41,8 @@ namespace CalculateSalaryApp.DataWorker
             return result;
         }
 
+        
+
         private void Delete<T> (T employee, string fileName, ref bool result) where T : class
         {
             List<T> employees = repository.Load<T>(fileName);
@@ -74,6 +76,14 @@ namespace CalculateSalaryApp.DataWorker
             return report.ToString();
         }
 
+        public string GetSpecificReport(DateTime start, DateTime finish, Employee emp)
+        {
+            StringBuilder report = new StringBuilder($"Report per interval from {start.ToString("d")} to {finish.ToString("d")}\n\n");
+            ReportData reportData = emp.GetReport(start, finish);
+            report.Append($"{emp.Name} worked {reportData.Hour} hours and earned {reportData.Pay}\n");
+            return report.ToString();
+        }
+
         private List<Employee> GetAllEmployee()
         {
             List<Employee> allEmployees = new List<Employee>();
@@ -83,5 +93,32 @@ namespace CalculateSalaryApp.DataWorker
             return allEmployees;
         }
 
+
+        public bool AddWorkingHours(Employee employee, TaskWork taskWork)
+        {
+            employee.Tasks.Add(taskWork);
+            bool result = false;
+            if (employee is Director director)
+            {
+                OverwriteEmployee<Director>(director, Settings.directorsFile);
+                result = true;
+            } else if(employee is Proger proger)
+            {
+                OverwriteEmployee<Proger>(proger, Settings.progersFile);
+                result = true;
+            } else if(employee is Freelancer freelancer)
+            {
+                OverwriteEmployee<Freelancer>(freelancer, Settings.freelancerFile);
+                result = true;
+            }
+            return result;
+        }
+
+        private void OverwriteEmployee<T>(T employee, string fileName) where T : class
+        {
+            List<T> employees = repository.Load<T>(fileName);
+            employees[employees.FindIndex(e => e.Equals(employee))] = employee;
+            repository.Save<T>(employees, fileName);
+        }
     }
 }
