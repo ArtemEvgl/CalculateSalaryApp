@@ -8,20 +8,20 @@ namespace CalculateSalaryApp.Models
 {
     public struct ReportData
     {
-		private int hour, salary;
+		private int hour, pay;
 
 		//todo: Добавить проверки
 		public ReportData(int hour, int salary)
 		{
 			this.hour = hour;
-			this.salary = salary;
+			this.pay = salary;
 		}
 
 		
 		
 		public int Pay
 		{
-			get { return salary; }
+			get { return pay; }
 		}
 
 		public int Hour

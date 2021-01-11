@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29827.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculateSalaryApp.BL", "CalculateSalaryApp\CalculateSalaryApp.BL.csproj", "{A89FCB11-3016-45E2-96C8-C0885ACD15C1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculateSalaryApp.CMD", "CalculateSalaryApp.CMD\CalculateSalaryApp.CMD.csproj", "{30A0BF17-FB0C-46BB-9A29-927B1008E067}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculateSalaryApp.Domain", "CalculateSalaryApp.Domain\CalculateSalaryApp.Domain.csproj", "{EE8CC612-29C2-4427-8E9A-4067B051647D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculateSalaryApp.Application", "CalculateSalaryApp.Application\CalculateSalaryApp.Application.csproj", "{78656A1A-4036-47E2-AF35-03DA1EC98423}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculateSalaryApp.Api", "CalculateSalaryApp.Api\CalculateSalaryApp.Api.csproj", "{B7126F93-4B6F-46BC-AB77-049477013EE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculateSalaryApp.DataAccess", "DataAccess\CalculateSalaryApp.DataAccess.csproj", "{73D61C63-5B5D-4447-90EC-A4F62B8CB8F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +19,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A89FCB11-3016-45E2-96C8-C0885ACD15C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A89FCB11-3016-45E2-96C8-C0885ACD15C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A89FCB11-3016-45E2-96C8-C0885ACD15C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A89FCB11-3016-45E2-96C8-C0885ACD15C1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{30A0BF17-FB0C-46BB-9A29-927B1008E067}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{30A0BF17-FB0C-46BB-9A29-927B1008E067}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30A0BF17-FB0C-46BB-9A29-927B1008E067}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30A0BF17-FB0C-46BB-9A29-927B1008E067}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE8CC612-29C2-4427-8E9A-4067B051647D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE8CC612-29C2-4427-8E9A-4067B051647D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE8CC612-29C2-4427-8E9A-4067B051647D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE8CC612-29C2-4427-8E9A-4067B051647D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78656A1A-4036-47E2-AF35-03DA1EC98423}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78656A1A-4036-47E2-AF35-03DA1EC98423}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78656A1A-4036-47E2-AF35-03DA1EC98423}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78656A1A-4036-47E2-AF35-03DA1EC98423}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7126F93-4B6F-46BC-AB77-049477013EE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7126F93-4B6F-46BC-AB77-049477013EE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7126F93-4B6F-46BC-AB77-049477013EE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7126F93-4B6F-46BC-AB77-049477013EE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73D61C63-5B5D-4447-90EC-A4F62B8CB8F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73D61C63-5B5D-4447-90EC-A4F62B8CB8F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73D61C63-5B5D-4447-90EC-A4F62B8CB8F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73D61C63-5B5D-4447-90EC-A4F62B8CB8F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
