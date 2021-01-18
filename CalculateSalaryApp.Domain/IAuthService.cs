@@ -1,8 +1,10 @@
 ﻿
+using CalculateSalaryApp.Model;
+
 namespace CalculateSalaryApp.Domain
 {
     public interface IAuthService
     {
-        bool Login(string lastName);
+        Employee Login(string lastName);
     }
 }
