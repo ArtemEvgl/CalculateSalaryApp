@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculateSalaryApp.Api", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculateSalaryApp.DataAccess", "DataAccess\CalculateSalaryApp.DataAccess.csproj", "{73D61C63-5B5D-4447-90EC-A4F62B8CB8F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateDataScript", "GenerateDataScript\GenerateDataScript.csproj", "{FA4426DC-F9BD-4FC6-B886-E65100082A5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{73D61C63-5B5D-4447-90EC-A4F62B8CB8F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73D61C63-5B5D-4447-90EC-A4F62B8CB8F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73D61C63-5B5D-4447-90EC-A4F62B8CB8F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA4426DC-F9BD-4FC6-B886-E65100082A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA4426DC-F9BD-4FC6-B886-E65100082A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA4426DC-F9BD-4FC6-B886-E65100082A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA4426DC-F9BD-4FC6-B886-E65100082A5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
