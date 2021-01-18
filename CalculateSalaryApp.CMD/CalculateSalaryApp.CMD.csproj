@@ -48,9 +48,28 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CalculateSalaryApp.Api\CalculateSalaryApp.Api.csproj">
+      <Project>{b7126f93-4b6f-46bc-ab77-049477013ee0}</Project>
+      <Name>CalculateSalaryApp.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CalculateSalaryApp.Application\CalculateSalaryApp.Application.csproj">
+      <Project>{78656a1a-4036-47e2-af35-03da1ec98423}</Project>
+      <Name>CalculateSalaryApp.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CalculateSalaryApp.Domain\CalculateSalaryApp.Domain.csproj">
+      <Project>{ee8cc612-29c2-4427-8e9a-4067b051647d}</Project>
+      <Name>CalculateSalaryApp.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccess\CalculateSalaryApp.DataAccess.csproj">
+      <Project>{73d61c63-5b5d-4447-90ec-a4f62b8cb8f0}</Project>
+      <Name>CalculateSalaryApp.DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
