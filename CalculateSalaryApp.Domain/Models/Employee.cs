@@ -11,13 +11,13 @@ namespace CalculateSalaryApp.Model
     {
         public Employee(string name, decimal salary)
         {
-            Name = name;           
+            LastName = name;           
             Salary = salary;
 
         }
 
         //TODO: Проверка
-        public string Name { get; set; }
+        public string LastName { get; set; }
         public decimal Salary { get; set; }
 
         public abstract string GetPersonalData(char delimiter);

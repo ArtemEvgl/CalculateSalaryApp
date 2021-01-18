@@ -17,7 +17,7 @@ namespace CalculateSalaryApp.Model
         }
         public override string GetPersonalData(char delimeter)
         {
-            return $"{Name}{delimeter}{Salary}{delimeter}Фрилансер{delimeter}\n";
+            return $"{LastName}{delimeter}{Salary}{delimeter}Фрилансер{delimeter}\n";
         }
 
     }
