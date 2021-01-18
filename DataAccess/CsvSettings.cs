@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    class CsvSettings
+    public class CsvSettings
     {
         public CsvSettings(char delimiter, string path)
         {

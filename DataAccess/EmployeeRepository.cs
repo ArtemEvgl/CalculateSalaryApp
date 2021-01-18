@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace DataAccess
 {
-    class EmployeeRepository : IEmployeeRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
 
         private char _delimiter;
@@ -14,7 +14,7 @@ namespace DataAccess
 
         public EmployeeRepository(CsvSettings csvSettings)
         {
-            _path = csvSettings.Path;
+            _path = csvSettings.Path + "\\employees.csv";
             _delimiter = csvSettings.Delimiter;
         }
         public void Add(Employee employee)
